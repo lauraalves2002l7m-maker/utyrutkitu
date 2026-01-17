@@ -169,13 +169,7 @@ async def check_payment_status(update, context):
 
     if uid not in user_last_payment:
         await update.callback_query.message.reply_text(
-            "❌ pagamento confirmado!!
-            
-            acesse o link..
-            https://l1nq.com/s/vazadosbr
-            
-            sua senh.. 2850",
-            parse_mode="Markdown"
+            "❌ "
         )
         return
 
