@@ -1,0 +1,7 @@
+python-telegram-bot==20.3
+fastapi
+uvicorn
+mercadopago
+python-dotenv
+httpx
+pydantic
