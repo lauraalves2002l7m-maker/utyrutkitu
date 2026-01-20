@@ -152,8 +152,7 @@ async def process_payment(update, context):
 🪙 PIX Copia e Cola:
 `{qr}`
 
-✨ Seu link VIP aparece sozinho após o pagamento.
-Se houver atraso, clique em Já paguei e o sistema libera seu acesso instantaneamente.""",
+✨""",
         parse_mode="Markdown"
     )
 
