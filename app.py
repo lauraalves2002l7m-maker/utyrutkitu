@@ -144,13 +144,16 @@ async def process_payment(update, context):
     # 1️⃣ Envia mensagem SEM botão
     sent = await msg.reply_text(
         f"""✅ Falta só 1 passo
+            Pague agora e receba o acesso 
+            vitalício automaticamente.
 
 💰 Valor: R$ {amount:.2f}
 
 🪙 PIX Copia e Cola:
 `{qr}`
 
-⏳ Aguarde 30 segundos para confirmar o pagamento.""",
+✨ Seu link VIP aparece sozinho após o pagamento.
+Se houver atraso, clique em Já paguei e o sistema libera seu acesso instantaneamente.""",
         parse_mode="Markdown"
     )
 
