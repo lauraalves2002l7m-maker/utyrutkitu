@@ -70,10 +70,11 @@ Aqui não existe Gados — só homens que Pegam Mulheres, Facil.💪
 
 ⚠️ Aviso rápido:
 Isso não é grátis. O acesso custa R$10 — e existe um motivo pra isso.
+   Saiba Qual👇
 """
 
 MAIN_TEXT = """
-🔱 Aqui eu te ensino:
+🔱 Você Vai Aprender:
 🔞 Como se comportar.
 🔞 Como falar perto dela.
 😈Oque Falar Pra Ela..
@@ -140,19 +141,32 @@ async def process_payment(update, context):
 
     msg = update.callback_query.message
 
-    await msg.reply_text(
+    # 1️⃣ Envia mensagem SEM botão
+    sent = await msg.reply_text(
         f"""✅ Falta só 1 passo
 
 💰 Valor: R$ {amount:.2f}
 
 🪙 PIX Copia e Cola:
-`{qr}`""",
+`{qr}`
+
+⏳ Aguarde 30 segundos para confirmar o pagamento.""",
         parse_mode="Markdown"
     )
 
     if qr_b64:
         img = io.BytesIO(base64.b64decode(qr_b64))
         await msg.reply_photo(img)
+
+    # 2️⃣ Espera 30 segundos
+    await asyncio.sleep(30)
+
+    # 3️⃣ Edita a mensagem e adiciona o botão
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("✅ Já paguei", callback_data="check_payment")]
+    ])
+
+    await sent.edit_reply_markup(reply_markup=keyboard)
 
 # ===================== CHECK PAYMENT =====================
 async def check_payment(update, context):
@@ -199,7 +213,7 @@ async def button(update: Update, context):
             [InlineKeyboardButton("❌ Vou sair", callback_data="exit")]
         ])
         await q.message.reply_text(
-            "⚠️ Último aviso:\nEsse acesso não é pra curiosos.",
+            "⚠️ Último aviso:\nEsse Conteúdo é 100% antiético. \nSão frases e estratégias que ninguém nunca te ensinou.",
             reply_markup=keyboard
         )
         return
@@ -212,6 +226,10 @@ async def button(update: Update, context):
         await q.message.reply_text(
             "Tudo certo. Esse acesso não aparece duas vezes."
         )
+        return
+
+    if q.data == "check_payment":
+        await check_payment(update, context)
         return
 
 # ===================== FASTAPI =====================
