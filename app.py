@@ -251,10 +251,8 @@ def main():
     bot_app.add_handler(CommandHandler("start", start))
     bot_app.add_handler(CallbackQueryHandler(button))
 
-    loop = asyncio.get_event_loop()
-    loop.create_task(bot_app.run_polling())
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # 🔥 AQUI ESTÁ A CORREÇÃO
+    bot_app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()
