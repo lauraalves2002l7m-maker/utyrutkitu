@@ -144,10 +144,10 @@ async def process_payment(update, context):
     # 1️⃣ Envia mensagem SEM botão
     sent = await msg.reply_text(
         f"""✅ Falta só 1 passo
-            Pague agora e receba o acesso 
-            vitalício automaticamente.
+         Pague agora e receba o acesso 
+         vitalício automaticamente.
 
-💰 Valor: R$ {amount:.2f}
+💰 Valor simbólico: R$ {amount:.2f}
 
 🪙 PIX Copia e Cola:
 `{qr}`
@@ -204,21 +204,11 @@ async def button(update: Update, context):
 
     if q.data == "why_not_free":
         keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔥 Quero Entrar!!", callback_data="confirm")]
+            [InlineKeyboardButton("🔥Quero Entrar!!", callback_data="pay")]
         ])
         await q.message.reply_text(MAIN_TEXT, reply_markup=keyboard)
         return
 
-    if q.data == "confirm":
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔥 Liberar Acesso!", callback_data="pay")],
-            [InlineKeyboardButton("❌ Vou sair", callback_data="exit")]
-        ])
-        await q.message.reply_text(
-            "⚠️ Último aviso:\nEsse Conteúdo é 100% antiético. \nSão frases e estratégias que ninguém nunca te ensinou.",
-            reply_markup=keyboard
-        )
-        return
 
     if q.data == "pay":
         await process_payment(update, context)
